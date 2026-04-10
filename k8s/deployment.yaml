@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-agent
+  labels:
+    app: metrics-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metrics-agent
+  template:
+    metadata:
+      labels:
+        app: metrics-agent
+    spec:
+      containers:
+        - name: metrics-agent
+          image: ghcr.io/georgikrumov16-cyber/metrics-agent:latest
+          ports:
+            - containerPort: 8080

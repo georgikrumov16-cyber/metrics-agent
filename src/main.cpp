@@ -3,8 +3,12 @@
 #include <string>
 #include <unistd.h>
 #include <sys/statvfs.h>
+<<<<<<< HEAD
 #include "httplib.h"
     
+=======
+#include "httplib.h"    
+>>>>>>> 5410df1 (Initial commit: DMAP project structure)
 
 using namespace std;
 // ---------------- CPU USAGE ----------------
@@ -20,7 +24,10 @@ double getCPUUsage() {
     idle1 = idle;
     total1 = user + nice + system + idle;
 
+
     usleep(1000000); // sleep 1000ms
+    usleep(100000); // sleep 100ms
+
 
     ifstream stat2("/proc/stat");
     stat2 >> cpu >> user >> nice >> system >> idle;
