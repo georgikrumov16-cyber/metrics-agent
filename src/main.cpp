@@ -3,12 +3,7 @@
 #include <string>
 #include <unistd.h>
 #include <sys/statvfs.h>
-<<<<<<< HEAD
 #include "httplib.h"
-    
-=======
-#include "httplib.h"    
->>>>>>> 5410df1 (Initial commit: DMAP project structure)
 
 using namespace std;
 // ---------------- CPU USAGE ----------------

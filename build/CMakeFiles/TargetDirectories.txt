@@ -1,0 +1,3 @@
+/home/georgi/projects/metrics-agent/build/CMakeFiles/metrics-agent.dir
+/home/georgi/projects/metrics-agent/build/CMakeFiles/edit_cache.dir
+/home/georgi/projects/metrics-agent/build/CMakeFiles/rebuild_cache.dir
