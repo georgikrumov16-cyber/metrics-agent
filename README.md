@@ -168,3 +168,5 @@ Add advanced dashboards
 
 📄 License
 MIT License — free to use, modify, and distribute.
+
+Trigger CI/CD
