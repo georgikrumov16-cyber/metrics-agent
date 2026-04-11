@@ -166,9 +166,5 @@ Add distributed tracing
 
 Add advanced dashboards
 
-🤝 Contributions
-Contributions, issues, and feature requests are welcome.
-Feel free to fork the repo and submit a PR.
-
 📄 License
 MIT License — free to use, modify, and distribute.
