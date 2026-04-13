@@ -1,123 +1,25 @@
-DevOps Monitoring & Automation Platform (DMAP)
-A cloud‑native observability and automation system built end‑to‑end.
+📌 Overview
+DMAP (DevOps Monitoring & Automation Platform) is a fully containerised, Kubernetes‑native monitoring system designed to collect, expose, scrape, and visualise system metrics using:
 
-DMAP is a production‑style DevOps platform that brings together a custom C++ metrics exporter, Kubernetes‑native deployment, Prometheus/Grafana monitoring, and a fully automated CI/CD pipeline.
-It demonstrates modern DevOps, SRE, and Platform Engineering practices — from low‑level systems programming to cloud‑native automation.
+A custom-built metrics agent
+
+Docker for containerisation
+
+Kubernetes for orchestration
+
+Prometheus Operator for scraping and alerting
+
+Grafana for dashboards
+
+Helm for packaging
+
+GitHub Actions for CI/CD
+
+This project demonstrates real‑world DevOps skills including infrastructure automation, observability, CI/CD pipelines, containerisation, and cloud‑native architecture.
 
 🚀 Features
-🔹 Custom C++ Metrics Agent
-Lightweight exporter written in C++
-
-Exposes metrics via /metrics in Prometheus format
-
-Designed for low overhead and containerized environments
-
-🔹 Kubernetes Deployment
-Dockerized agent deployed via Kubernetes Deployment + Service
-
-Helm‑ready structure for reproducible rollouts
-
-ServiceMonitor integration for automatic Prometheus scraping
-
-🔹 Observability Stack
-Prometheus for metrics collection
-
-Grafana dashboards for real‑time visualization
-
-Automatic target discovery
-
-Clean, production‑style monitoring architecture
-
-🔹 CI/CD Pipeline (GitHub Actions)
-Builds and tests the C++ agent
-
-Builds and pushes Docker images to GHCR
-
-Automated deployment workflow (extendable to kubectl/Helm)
-
-GitOps‑style workflow for consistent releases
-
-🏗️ Architecture Overview
-Code
-+---------------------------+
-|     C++ Metrics Agent     |
-|  (CPU, RAM, Disk Export)  |
-+-------------+-------------+
-              |
-              v
-+---------------------------+
-|        Kubernetes         |
-| Deployment + Service      |
-+-------------+-------------+
-              |
-              v
-+---------------------------+
-|     Prometheus Stack      |
-|  (Auto-scrape via SM)     |
-+-------------+-------------+
-              |
-              v
-+---------------------------+
-|         Grafana           |
-|  Dashboards & Alerts      |
-+---------------------------+
-📦 Tech Stack
-C++17
-
-Docker
-
-Kubernetes
-
-Helm
-
-Prometheus Operator
-
-Grafana
-
-GitHub Actions (CI/CD)
-
-Linux / Bash
-
-🛠️ Local Development
-Build the metrics agent
-bash
-mkdir build && cd build
-cmake ..
-make
-Run locally
-bash
-./metrics-agent
-Metrics available at:
-
-Code
-http://localhost:8080/metrics
-🐳 Docker Usage
-Build image
-bash
-docker build -t metrics-agent:latest .
-Run container
-bash
-docker run -p 8080:8080 metrics-agent:latest
-☸️ Kubernetes Deployment
-Apply manifests:
-
-bash
-kubectl apply -f k8s/
-Or deploy via Helm (chart coming soon):
-
-bash
-helm install metrics-agent ./helm/metrics-agent
-📊 Monitoring Integration
-Prometheus Target Discovery
-DMAP uses a ServiceMonitor to automatically register the metrics agent:
-
-yaml
-endpoints:
-  - port: http
-    path: /metrics
-    interval: 5s
-Grafana Dashboard
-Includes panels for:
+🔹 Custom Metrics Agent
+Collects:
 
 CPU usage
 
@@ -125,48 +27,159 @@ Memory usage
 
 Disk usage
 
-🔄 CI/CD Pipeline
-GitHub Actions workflow includes:
+Custom system metrics
 
-Build C++ project
+Exposes metrics via HTTP in Prometheus format.
+
+🔹 Kubernetes Deployment
+Deployment
+
+Service
+
+ServiceMonitor
+
+Optional Ingress
+
+🔹 Prometheus Integration
+Automatic scraping via ServiceMonitor
+
+Custom scrape intervals
+
+Optional alert rules
+
+🔹 Grafana Dashboards
+CPU usage
+
+Memory usage
+
+Disk usage
+
+Node metrics
+
+Custom agent metrics
+
+🔹 CI/CD Pipeline
+GitHub Actions pipeline includes:
+
+Build
+
+Test
+
+Docker image build
+
+Push to GHCR
+
+Helm lint
+
+Optional auto‑deploy to k3d
+
+🔹 Helm Chart
+Fully templated
+
+Configurable values
+
+Production‑ready structure
+
+🏗️ Architecture
+Code
++-------------------+        +---------------------+
+|   Metrics Agent   | -----> |     Prometheus      |
+| (C++ / Python)    |        | (Operator Managed)  |
++-------------------+        +---------------------+
+           |                           |
+           |                           v
+           |                   +----------------+
+           |                   |    Grafana     |
+           |                   |   Dashboards   |
+           |                   +----------------+
+           |
+           v
++-------------------+
+|   Kubernetes      |
+| (k3d / Cloud)     |
++-------------------+
+🛠️ Tech Stack
+Component	Technology
+Metrics Agent	C++ / Python
+Containerisation	Docker
+Orchestration	Kubernetes (k3d)
+Monitoring	Prometheus Operator
+Visualisation	Grafana
+Packaging	Helm
+CI/CD	GitHub Actions
+Registry	GHCR
+
+
+📦 Local Development (k3d)
+Create cluster
+bash
+k3d cluster create dmap --servers 1 --agents 2
+Import image
+bash
+k3d image import metrics-agent:latest -c dmap
+Deploy
+bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl apply -f servicemonitor.yaml
+📊 Grafana Dashboard
+Access Grafana:
+
+bash
+kubectl port-forward -n monitoring svc/monitoring-grafana 3000:80
+Open:
+
+Code
+http://localhost:3000
+Dashboard includes:
+
+CPU usage
+
+Memory usage
+
+Disk usage
+
+Node metrics
+
+Custom agent metrics
+
+🔄 CI/CD Pipeline
+GitHub Actions pipeline includes:
+
+Build & test metrics agent
 
 Build Docker image
 
 Push to GHCR
 
-(Extendable) Deploy to Kubernetes
+Helm lint
 
-📚 Project Goals
-DMAP was built to demonstrate:
+Optional: deploy to k3d
 
-Cloud‑native architecture
+📁 Repository Structure
+Code
+.
+├── src/
+├── include/
+├── Dockerfile
+├── deployment.yaml
+├── service.yaml
+├── servicemonitor.yaml
+├── charts/
+│   └── dmap/
+├── .github/workflows/
+│   └── ci.yaml
+└── README.md
+🧠 What I Learned 
+Working on this project taught me a lot about how I think and work as an engineer. I realised how much I enjoy breaking down complex systems into smaller, understandable pieces — and then putting them back together in a clean, reliable way.
 
-Observability engineering
+I learned how important it is to stay patient when things go wrong, especially with Kubernetes and networking. Every issue forced me to understand the system more deeply instead of just applying quick fixes.
 
-Kubernetes operations
+I also discovered that I really enjoy building things that are observable. Seeing my own metrics appear in Prometheus and Grafana felt like a milestone — it made the project feel real, not just theoretical.
 
-CI/CD automation
+Most importantly, this project showed me that I can take an idea from nothing to a working, production‑style system, even when the path isn’t straightforward. It gave me confidence in my ability to learn, troubleshoot, and build things that actually matter.
 
-Infrastructure‑as‑Code
-
-Systems programming in C++
-
-Real‑world DevOps workflows
-
-🗺️ Roadmap
-Add real CPU/memory/disk collectors
-
-Add Helm chart
-
-Add alerting rules
-
-Add autoscaling (HPA)
-
-Add distributed tracing
-
-Add advanced dashboards
-
-📄 License
-MIT License — free to use, modify, and distribute.
-
-Trigger CI/CD
+👤 Author
+Georgi Krumov 
+Junior DevOps & Software Engineering Professional
+Hampshire, UK
