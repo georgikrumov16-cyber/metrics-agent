@@ -1,5 +1,9 @@
 name: CI/CD Pipeline
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   push:
     branches: [ "main" ]
@@ -24,12 +28,12 @@ jobs:
       - name: Build Docker image
         run: docker build -t metrics-agent:latest .
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: georgikrumov16-cyber
-          password: ${{ secrets.GHCR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag image
         run: docker tag metrics-agent:latest ghcr.io/georgikrumov16-cyber/metrics-agent:latest
@@ -37,27 +41,4 @@ jobs:
       - name: Push image
         run: docker push ghcr.io/georgikrumov16-cyber/metrics-agent:latest
 
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v3
-
-    - name: Configure kubeconfig
-      run: |
-        mkdir -p ~/.kube
-        echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
-
-    - name: Update Deployment image
-      run: |
-        kubectl set image deployment/metrics-agent metrics-agent=ghcr.io/georgikrumov16-cyber/metrics-agent:latest
-
-    - name: Verify rollout
-      run: kubectl rollout status deployment/metrics-agent
 
