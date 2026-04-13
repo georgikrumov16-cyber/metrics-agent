@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: metrics-agent
-          image: metrics-agent:latest
-          imagePullPolicy: Never
+          image: ghcr.io/georgikrumov16-cyber/metrics-agent:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
+
