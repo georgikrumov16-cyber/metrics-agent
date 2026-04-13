@@ -33,7 +33,7 @@ jobs:
         with:
           registry: ghcr.io
           username: georgikrumov16-cyber
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Tag image
         run: docker tag metrics-agent:latest ghcr.io/georgikrumov16-cyber/metrics-agent:latest
