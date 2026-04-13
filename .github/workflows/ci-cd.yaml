@@ -32,10 +32,10 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
 
       - name: Tag image
-        run: docker tag metrics-agent:latest ghcr.io/${{ github.repository_owner }}/metrics-agent:latest
+        run: docker tag metrics-agent:latest ghcr.io/georgikrumov16-cyber/metrics-agent:latest
 
       - name: Push image
-        run: docker push ghcr.io/${{ github.repository_owner }}/metrics-agent:latest
+        run: docker push ghcr.io/georgikrumov16-cyber/metrics-agent:latest
 
 
   deploy:
@@ -56,7 +56,7 @@ jobs:
 
     - name: Update Deployment image
       run: |
-        kubectl set image deployment/metrics-agent metrics-agent=ghcr.io/${{ github.repository_owner }}/metrics-agent:latest
+        kubectl set image deployment/metrics-agent metrics-agent=ghcr.io/georgikrumov16-cyber/metrics-agent:latest
 
     - name: Verify rollout
       run: kubectl rollout status deployment/metrics-agent
