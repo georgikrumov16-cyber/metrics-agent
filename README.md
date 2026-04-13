@@ -1,3 +1,6 @@
+DMAP — DevOps Monitoring & Automation Platform
+A production‑grade monitoring platform built with Kubernetes, Prometheus, Grafana, and a custom metrics agent.
+
 📌 Overview
 DMAP (DevOps Monitoring & Automation Platform) is a fully containerised, Kubernetes‑native monitoring system designed to collect, expose, scrape, and visualise system metrics using:
 
@@ -170,7 +173,7 @@ Code
 ├── .github/workflows/
 │   └── ci.yaml
 └── README.md
-🧠 What I Learned 
+🧠 What I Learned (Personal)
 Working on this project taught me a lot about how I think and work as an engineer. I realised how much I enjoy breaking down complex systems into smaller, understandable pieces — and then putting them back together in a clean, reliable way.
 
 I learned how important it is to stay patient when things go wrong, especially with Kubernetes and networking. Every issue forced me to understand the system more deeply instead of just applying quick fixes.
@@ -180,6 +183,6 @@ I also discovered that I really enjoy building things that are observable. Seein
 Most importantly, this project showed me that I can take an idea from nothing to a working, production‑style system, even when the path isn’t straightforward. It gave me confidence in my ability to learn, troubleshoot, and build things that actually matter.
 
 👤 Author
-Georgi Krumov 
+Veso  
 Junior DevOps & Software Engineering Professional
 Hampshire, UK
